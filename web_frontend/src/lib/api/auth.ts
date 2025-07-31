@@ -43,7 +43,7 @@ export async function register(email: string, password: string) {
     try {
       const errorData = await resp.json();
       errorMessage = errorData.error || errorMessage;
-    } catch (e) {
+    } catch {
       // If we can't parse the error response, use default message
     }
     throw new Error(errorMessage);
