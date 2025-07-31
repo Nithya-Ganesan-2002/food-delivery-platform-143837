@@ -29,9 +29,19 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[var(--background)] text-[var(--foreground)]`}
       >
         <header className="flex justify-between items-center p-4 border-b bg-white dark:bg-neutral-900">
-          <Link href="/" className="text-2xl font-bold text-orange-600">
-            🍽️ Foodie
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/" className="text-2xl font-bold text-orange-600">
+              🍽️ Foodie
+            </Link>
+            {/* PUBLIC_INTERFACE: My Location Button (UI only) */}
+            <button
+              type="button"
+              className="rounded border px-4 py-1.5 border-orange-400 text-orange-600 bg-orange-50 hover:bg-orange-100 transition font-semibold shadow-sm text-base"
+              aria-label="My Location"
+            >
+              My Location
+            </button>
+          </div>
           <nav className="flex items-center gap-6 text-base">
             <Link href="/restaurants" className="hover:text-orange-700">
               Restaurants
