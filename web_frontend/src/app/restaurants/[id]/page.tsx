@@ -9,20 +9,21 @@ interface MenuItem {
   price?: number;
 }
 
-// PUBLIC_INTERFACE
-// Required for output: "export" in next.config.ts
-export function generateStaticParams() {
-  // No static routes are generated for now
-  return [];
-}
 
-// PUBLIC_INTERFACE
-// Server component for dynamic restaurant details
-export default async function RestaurantDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+
+/**
+ * PUBLIC_INTERFACE
+ * Server component for dynamic restaurant details page (`/restaurants/[id]`).
+ * Expects a params object with the restaurant id.
+ */
+/**
+ * PUBLIC_INTERFACE
+ * Server component for dynamic restaurant details page (`/restaurants/[id]`).
+ * Expects a params object with the restaurant id.
+ */
+export default async function RestaurantDetailPage(props: any) {
+  // Next.js passes props with object shape: { params: { id: string } }
+  const { params } = props;
   let restaurant: Restaurant | null = null;
   let menu: MenuItem[] = [];
   let error = "";
