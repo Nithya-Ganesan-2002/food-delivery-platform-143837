@@ -13,7 +13,18 @@ export async function login(email: string, password: string) {
     credentials: "include",
     body: JSON.stringify({ email, password })
   });
-  if (!resp.ok) throw new Error("Invalid credentials");
+  
+  if (!resp.ok) {
+    let errorMessage = "Invalid credentials";
+    try {
+      const errorData = await resp.json();
+      errorMessage = errorData.error || errorMessage;
+    } catch {
+      // If we can't parse the error response, use default message
+    }
+    throw new Error(errorMessage);
+  }
+  
   // Could handle auth token or cookie if backend sets it
   return resp.json();
 }
@@ -26,6 +37,17 @@ export async function register(email: string, password: string) {
     body: JSON.stringify({ email, password }),
     credentials: "include"
   });
-  if (!resp.ok) throw new Error("Registration failed");
+  
+  if (!resp.ok) {
+    let errorMessage = "Registration failed";
+    try {
+      const errorData = await resp.json();
+      errorMessage = errorData.error || errorMessage;
+    } catch (e) {
+      // If we can't parse the error response, use default message
+    }
+    throw new Error(errorMessage);
+  }
+  
   return resp.json();
 }

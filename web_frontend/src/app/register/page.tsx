@@ -7,20 +7,30 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
   const router = useRouter();
 
   async function onRegister(e: React.FormEvent) {
     e.preventDefault();
     setErr("");
+    setSuccess("");
+    setLoading(true);
+    
     try {
       await register(email, password);
-      router.replace("/login");
+      setSuccess("Registration successful! Redirecting to login...");
+      setTimeout(() => {
+        router.replace("/login");
+      }, 2000);
     } catch (e) {
       if (e instanceof Error) {
         setErr(e.message || "Registration failed.");
       } else {
         setErr("Registration failed.");
       }
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -46,9 +56,14 @@ export default function RegisterPage() {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        {err && <div className="text-red-600">{err}</div>}
-        <button type="submit" className="bg-orange-600 text-white rounded px-4 py-2 font-bold hover:bg-orange-700">
-          Register
+        {err && <div className="text-red-600 text-sm">{err}</div>}
+        {success && <div className="text-green-600 text-sm">{success}</div>}
+        <button 
+          type="submit" 
+          disabled={loading}
+          className="bg-orange-600 text-white rounded px-4 py-2 font-bold hover:bg-orange-700 disabled:bg-orange-400 disabled:cursor-not-allowed"
+        >
+          {loading ? "Registering..." : "Register"}
         </button>
       </form>
     </section>
