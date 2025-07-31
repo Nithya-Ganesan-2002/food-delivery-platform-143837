@@ -44,6 +44,13 @@ export default function RootLayout({
             <Link href="/account" className="hover:text-orange-700">
               Account
             </Link>
+            <Link
+              href="/contact"
+              className="rounded border px-4 py-1.5 border-green-700 text-green-700 hover:bg-green-50 transition font-medium"
+              style={{ borderColor: "#43a047", color: "#43a047" }}
+            >
+              Contact Us
+            </Link>
             <Link href="/login" className="ml-2 rounded bg-orange-600 text-white px-4 py-1.5 hover:bg-orange-700 shadow transition">
               Login
             </Link>

@@ -1,6 +1,6 @@
 import { fetchRestaurantDetails, fetchMenu } from "@/lib/api/restaurants";
 import MenuListClientWrapper from "@/components/MenuListClientWrapper";
-import type { Restaurant } from "../page";
+import { type Restaurant } from "../page";
 
 interface MenuItem {
   id: string;
@@ -9,21 +9,13 @@ interface MenuItem {
   price?: number;
 }
 
-
-
-/**
- * PUBLIC_INTERFACE
- * Server component for dynamic restaurant details page (`/restaurants/[id]`).
- * Expects a params object with the restaurant id.
- */
-/**
- * PUBLIC_INTERFACE
- * Server component for dynamic restaurant details page (`/restaurants/[id]`).
- * Expects a params object with the restaurant id.
- */
-export default async function RestaurantDetailPage(props: any) {
+// PUBLIC_INTERFACE
+// Server component for dynamic restaurant details page (`/restaurants/[id]`).
+// Expects a params object with the restaurant id.
+export default async function RestaurantDetailPage(
+  { params }: { params: { id: string } }
+) {
   // Next.js passes props with object shape: { params: { id: string } }
-  const { params } = props;
   let restaurant: Restaurant | null = null;
   let menu: MenuItem[] = [];
   let error = "";
